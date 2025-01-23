@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo} from 'react';
+import React, { useState, useEffect, useMemo, useCallback} from 'react';
 
 
 function App() {
@@ -23,15 +23,11 @@ function App() {
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
     }, [tarefas]);
 
- function handleAdd  ()  {
-  if(input === ''){
-    alert('Você precisa digitar uma tarefa');
-    return;
-  }else{
-  setTarefas([...tarefas, input]);
-  setInput('');
-  }
-}
+    const handleAdd = useCallback(() => {
+      setTarefas([...tarefas, input]);
+      setInput('');
+    }, [input, tarefas]);
+    
 
 const totalTarefas = useMemo(() => tarefas.length, [tarefas]);
 
