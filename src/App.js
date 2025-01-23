@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useMemo} from 'react';
 
 
 function App() {
@@ -33,6 +33,8 @@ function App() {
   }
 }
 
+const totalTarefas = useMemo(() => tarefas.length, [tarefas]);
+
 
 
   return (
@@ -42,6 +44,7 @@ function App() {
           <li key={tarefa}>{tarefa}</li>
         ))}
       </ul>
+      <strong>Você tem {totalTarefas} tarefas!</strong> <br/>
 
       <input type='text' value={input} onChange={(e) => setInput(e.target.value)}/>
 
