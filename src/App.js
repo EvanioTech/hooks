@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 
 
 function App() {
@@ -11,6 +11,17 @@ function App() {
     const [nome, setNome] = useState('Matias');
 
     const [input, setInput] = useState('');
+
+    useEffect(() => {
+      const tarefasStorage = localStorage.getItem('tarefas');
+      if(tarefasStorage){
+        setTarefas(JSON.parse(tarefasStorage));
+      }
+    }, []);
+
+    useEffect(() => {
+      localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    }, [tarefas]);
 
  function handleAdd  ()  {
   if(input === ''){
